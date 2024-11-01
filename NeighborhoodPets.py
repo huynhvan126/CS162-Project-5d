@@ -9,6 +9,7 @@ class DuplicateNameError(Exception):
     Exception raised when a duplicate name is encountered.
     """
     pass
+
 class NeighborhoodPets:
     """
     A class to manage a collection of neighborhood pets, allowing users to add, delete, and retrieve pet information.
@@ -25,7 +26,6 @@ class NeighborhoodPets:
         """
         if pet_name in self._pets:
             raise DuplicateNameError(f"A pet with name '{pet_name}' already exists.")
-
         self._pets[pet_name] = {"species": species, "owner": owner_name}
 
     def delete_pet(self, pet_name: str):
@@ -39,7 +39,7 @@ class NeighborhoodPets:
         """
         Get the owner of a pet.
         """
-        return self._pets[pet_name]["owner"] if pet_name in self._pets else None
+        return self._pets.get(pet_name, {}).get("owner")
 
     def save_as_json(self, filename: str):
         """
